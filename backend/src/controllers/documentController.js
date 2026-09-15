@@ -6,11 +6,10 @@ function uploadDocument(req, res) {
   }
 
   try {
-    const owner = req.body.owner || 'anonimo';
     const document = documentService.createDocument({
       id: req.documentId,
       file: req.file,
-      owner,
+      owner: req.body.owner,
     });
     return res.status(201).json(document);
   } catch (error) {

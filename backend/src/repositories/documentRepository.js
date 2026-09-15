@@ -15,4 +15,8 @@ function findById(id) {
   return documents.find((document) => document.id === id);
 }
 
-module.exports = { save, findAll, findById };
+function clear() {
+  documents.length = 0;
+}
+
+module.exports = { save, findAll, findById, clear };
