@@ -94,5 +94,6 @@ test('getDocumentById retorna o documento correspondente', () => {
 
 test('normalizeOwner remove espaços e preserva valores válidos', () => {
   assert.strictEqual(normalizeOwner(' carla '), 'carla');
+  assert.strictEqual(normalizeOwner('   '), DEFAULT_OWNER);
   assert.strictEqual(normalizeOwner(), DEFAULT_OWNER);
 });
