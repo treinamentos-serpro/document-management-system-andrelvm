@@ -1,7 +1,7 @@
 const documentRepository = require('../repositories/documentRepository');
 
-function createDocument({ id, file, owner }) {
-  const document = {
+function buildDocumentMetadata({ id, file, owner }) {
+  return {
     id,
     originalName: file.originalname,
     size: file.size,
@@ -10,6 +10,10 @@ function createDocument({ id, file, owner }) {
     path: file.path,
     mimetype: file.mimetype,
   };
+}
+
+function createDocument(documentData) {
+  const document = buildDocumentMetadata(documentData);
   return documentRepository.save(document);
 }
 
