@@ -4,6 +4,7 @@ const documentRepository = require('../src/repositories/documentRepository');
 const documentService = require('../src/services/documentService');
 const {
   DEFAULT_OWNER,
+  buildDocumentRecord,
   normalizeOwner,
 } = require('../src/services/documentMetadataService');
 
@@ -50,6 +51,22 @@ test('createDocument aplica owner padrão quando o valor não é informado', () 
   });
 
   assert.strictEqual(document.owner, DEFAULT_OWNER);
+});
+
+test('buildDocumentRecord aplica owner padrão no registro final', () => {
+  const document = buildDocumentRecord({
+    id: 'doc_builder',
+    file: {
+      originalname: 'resumo.txt',
+      size: 64,
+      path: '/tmp/resumo.txt',
+      mimetype: 'text/plain',
+    },
+  });
+
+  assert.strictEqual(document.owner, DEFAULT_OWNER);
+  assert.strictEqual(document.originalName, 'resumo.txt');
+  assert.ok(Date.parse(document.uploadedAt), 'uploadedAt deve ser uma data ISO válida');
 });
 
 test('listDocuments retorna os documentos persistidos', () => {
